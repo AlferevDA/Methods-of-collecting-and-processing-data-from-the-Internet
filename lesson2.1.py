@@ -94,5 +94,4 @@ def get_tickets(origin_name, destination_name, one_way_ticket=True):
 
     return tickets
 
-
 tickets = get_tickets('Череповец', 'Москва', one_way_ticket=False)
