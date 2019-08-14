@@ -1,26 +1,26 @@
 from pprint import pprint
-#import re
+import re
 import requests
 import json
 import pandas as pd
 
 # Задача 1 (Данные о погоде)
+'''
+req = requests.get("https://yandex.ru").text
+temp = re.findall("([-+][0-9]+)°",req)
+print(temp)
 
-#req = requests.get("https://yandex.ru").text
-#temp = re.findall("([-+][0-9]+)°",req)
-#print(temp)
-
-#cities = ['Moscow', 'Novosibirsk', 'Anapa', 'Kazan', 'Tomsk', 'Vladivostok']
-#appid = 'e91a6d9a3c9d15102a89ac457b045ec2'
-#main_link = 'http://api.openweathermap.org/data/2.5/weather?'
-#for city in cities:
-#    link = f'{main_link}q={city}&appid={appid}'
-#    req = requests.get(link)
-#    data = json.loads(req.text)
-#    print(data['name'],data['main']['temp']-273.15)
-
+cities = ['Moscow', 'Novosibirsk', 'Anapa', 'Kazan', 'Tomsk', 'Vladivostok']
+appid = 'e91a6d9a3c9d15102a89ac457b045ec2'
+main_link = 'http://api.openweathermap.org/data/2.5/weather?'
+for city in cities:
+    link = f'{main_link}q={city}&appid={appid}'
+    req = requests.get(link)
+    data = json.loads(req.text)
+    print(data['name'],data['main']['temp']-273.15)
+'''
 # Задача 2 (Авиалинии)
-
+'''
 #link = 'http://min-prices.aviasales.ru/calendar_preload?'
 #origin = 'MOW' #IATA == Moscow -> MOW
 #destination = 'LED' #IATA == LED
@@ -30,7 +30,7 @@ import pandas as pd
 #pprint(data)
 #for i in data['best_prices']:
 #    print(i['value'],i['depart_date'],i['gate'])
-
+'''
 # Доработать приложение по поиску авиабилетов, чтобы оно возвращало билеты по
 # названию города, а не по IATA коду. (У aviasales есть для этого
 # дополнительное API) Пункт отправления и пункт назначения должны передаваться
