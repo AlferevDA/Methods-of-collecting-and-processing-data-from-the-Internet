@@ -9,8 +9,8 @@ def get_link(topic):
 def get_topic_page(topic):
     link = get_link(topic)
     html_content = requests.get(link).text
-    # with open('new.html','w', encoding='utf-8') as f:
-    #     f.write(html_content)
+    #with open('parced_page/new.html','w', encoding='utf-8') as f:
+    #    f.write(html_content)
     return html_content
 
 def get_topic_text(topic):
@@ -20,7 +20,7 @@ def get_topic_text(topic):
 
 def get_common_words(topic):
     word_list = get_topic_text(topic)
-    rate=()
+    rate={}
     for word in word_list:
         if word in rate:
             rate[word] +=1
@@ -30,4 +30,4 @@ def get_common_words(topic):
     rate_list.sort(key = lambda x: -x[1]) # - это сортировка от большего к меньшему
     return rate_list
 
-pprint(get_common_words('Дерево')[:10])
+pprint(get_common_words('Футбол')[:10])
