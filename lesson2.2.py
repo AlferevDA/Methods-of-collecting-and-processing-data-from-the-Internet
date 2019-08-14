@@ -9,7 +9,7 @@ def get_link(topic):
 def get_topic_page(topic):
     link = get_link(topic)
     html_content = requests.get(link).text
-    #with open('parced_page/new.html','w', encoding='utf-8') as f:
+    #with open('new.html','w', encoding='utf-8') as f:
     #    f.write(html_content)
     return html_content
 
