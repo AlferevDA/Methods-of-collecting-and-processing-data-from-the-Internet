@@ -64,4 +64,38 @@ def get_first_linked_page(topic, n_words=10):
     except:
         pass
 
-get_first_linked_page('Ломоносов')
+#get_first_linked_page('Ломоносов')
+
+# * Научить приложение определять количество ссылок в статье (раздел Ссылки).
+# Выполнить поиск слов в статьях по каждой ссылке и результаты записать в
+# отдельные файлы.
+
+def get_all_linked_pages(topic, n_words=10):
+    html_content = get_topic_page(topic)
+    try:
+        text = re.findall(r'<li><a rel=.+\sclass=.+\shref=\"https?://\S+?\">', html_content)
+        print(f'Кол-во ссылок в статье по теме {topic}: {len(text)}')
+        print('\n')
+        for idx, line in enumerate(text):
+            link = re.findall(r'"((http)s?://.*?)"', line)[0][0]
+            try:
+                html = requests.get(link, timeout=5).text
+                words = re.findall(r'[а-яА-Я]{3,}', html)
+                counter = Counter(words)
+                most_common_words = dict(counter.most_common(n_words))
+                file_name = topic.capitalize() + '_' + '0' * (4 - len(str(idx)))+ str(idx+1) + '.json'
+                with open(file_name, 'w', encoding='utf-8') as f:
+                    f.write(link)
+                with open(file_name, 'a', encoding='utf-8') as f:
+                    json.dump(most_common_words, f, ensure_ascii=False)
+                print(f'Ссылка №{idx+1}: {link}')
+                print(f'{n_words} значимых слов:')
+                pprint(most_common_words)
+                print(f'Data saved to: {file_name}')
+                print('\n')
+            except:
+                continue
+    except:
+        pass
+
+get_all_linked_pages('Ломоносов')
